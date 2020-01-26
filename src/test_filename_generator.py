@@ -65,6 +65,19 @@ class Tests(unittest.TestCase):
         filenames = filename_generator.main(btm_lat, top_lat, left_lon, right_lon)
         self.assertListEqual(filenames, expected_filenames)
 
+    def test_gmt_all_quadrants(self):
+        btm_lat = -1.5
+        top_lat = 2.5
+        left_lon = -1.5
+        right_lon = 1.5
+        expected_filenames = ['S02W002.hgt', 'S02W001.hgt', 'S02E000.hgt', 'S02E001.hgt',
+                              'S01W002.hgt', 'S01W001.hgt', 'S01E000.hgt', 'S01E001.hgt',
+                              'N00W002.hgt', 'N00W001.hgt', 'N00E000.hgt', 'N00E001.hgt',
+                              'N01W002.hgt', 'N01W001.hgt', 'N01E000.hgt', 'N01E001.hgt',
+                              'N02W002.hgt', 'N02W001.hgt', 'N02E000.hgt', 'N02E001.hgt']
+        filenames = filename_generator.main(btm_lat, top_lat, left_lon, right_lon)
+        self.assertListEqual(filenames, expected_filenames)
+
     def test_that_wrap_between_west_180_and_east_180_gives_correct_values(self):
         result = filename_generator.wrap_longitude_between_west_180_and_east_179(50.5)
         self.assertEqual(result, 50.5)

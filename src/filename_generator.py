@@ -22,9 +22,11 @@ def main(btm_lat, top_lat, left_lon, right_lon):
     for lat in range(btm_lat_int, top_lat_int + 1):
         lat_hem = 'N' if lat >= 0 else 'S'
         lat_padded = str(abs(lat)).zfill(2)
-        for lon in range(left_lon_int, right_lon_int + 1):
-            lon_hem = 'E' if lon >= 0 else 'W'
-            lon_padded = str(abs(lon)).zfill(3)
+        degrees_between = get_degrees_between_longitudes(left_lon_int, right_lon_int)
+        for i in range(0, degrees_between + 1):
+            wrapped_lon = wrap_longitude_between_west_180_and_east_179(left_lon_int + i)
+            lon_hem = 'E' if wrapped_lon >= 0 else 'W'
+            lon_padded = str(abs(wrapped_lon)).zfill(3)
             filename = filename_format.format(lat_hem, lat_padded, lon_hem, lon_padded)
             filenames.append(filename)
     return filenames
