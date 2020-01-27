@@ -101,6 +101,26 @@ class Tests(unittest.TestCase):
         filenames = filename_generator.generate_filenames(btm_lat, top_lat, left_lon, right_lon)
         self.assertListEqual(filenames, expected_filenames)
 
+    def test_right_of_idl(self):
+        btm_lat = 4.2
+        top_lat = 5.2
+        left_lon = -179.8
+        right_lon = -178.8
+        expected_filenames = ['N04W180.SRTMGL1.hgt.zip', 'N04W179.SRTMGL1.hgt.zip',
+                              'N05W180.SRTMGL1.hgt.zip', 'N05W179.SRTMGL1.hgt.zip']
+        filenames = filename_generator.generate_filenames(btm_lat, top_lat, left_lon, right_lon)
+        self.assertListEqual(filenames, expected_filenames)
+
+    def test_left_of_idl(self):
+        btm_lat = 4.2
+        top_lat = 5.2
+        left_lon = 178.8
+        right_lon = 179.9
+        expected_filenames = ['N04E178.SRTMGL1.hgt.zip', 'N04E179.SRTMGL1.hgt.zip',
+                              'N05E178.SRTMGL1.hgt.zip', 'N05E179.SRTMGL1.hgt.zip']
+        filenames = filename_generator.generate_filenames(btm_lat, top_lat, left_lon, right_lon)
+        self.assertListEqual(filenames, expected_filenames)
+
     def test_gmt_all_quadrants(self):
         btm_lat = -1.5
         top_lat = 2.5
@@ -116,6 +136,26 @@ class Tests(unittest.TestCase):
                               'N01E001.SRTMGL1.hgt.zip',
                               'N02W002.SRTMGL1.hgt.zip', 'N02W001.SRTMGL1.hgt.zip', 'N02E000.SRTMGL1.hgt.zip',
                               'N02E001.SRTMGL1.hgt.zip']
+        filenames = filename_generator.generate_filenames(btm_lat, top_lat, left_lon, right_lon)
+        self.assertListEqual(filenames, expected_filenames)
+
+    def test_right_of_gmt(self):
+        btm_lat = 5.3
+        top_lat = 6.3
+        left_lon = 0.2
+        right_lon = 1.2
+        expected_filenames = ['N05E000.SRTMGL1.hgt.zip', 'N05E001.SRTMGL1.hgt.zip',
+                              'N06E000.SRTMGL1.hgt.zip', 'N06E001.SRTMGL1.hgt.zip']
+        filenames = filename_generator.generate_filenames(btm_lat, top_lat, left_lon, right_lon)
+        self.assertListEqual(filenames, expected_filenames)
+
+    def test_left_of_gmt(self):
+        btm_lat = 5.3
+        top_lat = 6.3
+        left_lon = -1.2
+        right_lon = -0.2
+        expected_filenames = ['N05W002.SRTMGL1.hgt.zip', 'N05W001.SRTMGL1.hgt.zip',
+                              'N06W002.SRTMGL1.hgt.zip', 'N06W001.SRTMGL1.hgt.zip']
         filenames = filename_generator.generate_filenames(btm_lat, top_lat, left_lon, right_lon)
         self.assertListEqual(filenames, expected_filenames)
 

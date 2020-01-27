@@ -12,7 +12,7 @@ def generate_filenames(btm_lat, top_lat, left_lon, right_lon):
         btm_lat_int = btm_lat_int - 1
     if top_lat_int <= 0:
         top_lat_int = top_lat_int - 1
-    if left_lon_int <= 0:
+    if left_lon_int < 0:
         left_lon_int = left_lon_int - 1
     if right_lon_int <= 0:
         right_lon_int = right_lon_int - 1
