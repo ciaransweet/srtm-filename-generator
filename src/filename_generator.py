@@ -1,9 +1,7 @@
-import sys
-
-filename_format = '{0}{1}{2}{3}.hgt'
+FILENAME_FORMAT = '{0}{1}{2}{3}.SRTMGL1.hgt.zip'
 
 
-def main(btm_lat, top_lat, left_lon, right_lon):
+def generate_filenames(btm_lat, top_lat, left_lon, right_lon):
     filenames = []
     btm_lat_int = int(btm_lat)
     top_lat_int = int(top_lat)
@@ -27,7 +25,7 @@ def main(btm_lat, top_lat, left_lon, right_lon):
             wrapped_lon = wrap_longitude_between_west_180_and_east_179(left_lon_int + i)
             lon_hem = 'E' if wrapped_lon >= 0 else 'W'
             lon_padded = str(abs(wrapped_lon)).zfill(3)
-            filename = filename_format.format(lat_hem, lat_padded, lon_hem, lon_padded)
+            filename = FILENAME_FORMAT.format(lat_hem, lat_padded, lon_hem, lon_padded)
             filenames.append(filename)
     return filenames
 
@@ -42,7 +40,3 @@ def get_degrees_between_longitudes(left_lon, right_lon):
         return (right_lon - left_lon) % 180
     else:
         return right_lon - left_lon
-
-
-if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
